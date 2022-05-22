@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件明名空间,一个mapper接口的全类名和对应namespace保持一致-->
+<mapper namespace="com.xuyuchao.mapper.StudentMapper">
+
+    <resultMap id="studentResultMapper" type="com.xuyuchao.pojo.Student">
+        <id property="sId" column="s_id"></id>
+        <result column="s_name" property="sName"></result>
+        <result column="s_birth" property="sBirth"></result>
+        <result column="s_sex" property="sSex"></result>
+    </resultMap>
+
+    <!--List<Student> getAllStudent();-->
+    <select id="getAllStudent" resultMap="studentResultMapper">
+        select * from student
+    </select>
+
+    <!--Student getStudentById(@Param("id")String id);-->
+    <select id="getStudentById" resultType="student">
+        select * from student where s_id = #{id}
+    </select>
+
+    <!--void addStudent(Student student);-->
+    <insert id="addStudent" parameterType="student">
+        insert into student(s_id,s_name,s_birth,s_sex) values(#{sId},#{sName},#{sBirth},#{sSex})
+    </insert>
+</mapper>
